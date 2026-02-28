@@ -19,28 +19,13 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_zen;
 
+  # using sway
+  services.gnome.gnome-keyring.enable = true;
 
-  # enabling i3wm(window manager)
-  environment.pathsToLink = ["/libexec"];
-  services.xserver = {
+  programs.sway = {
     enable = true;
-
-    desktopManager = {
-      xterm.enable = false;
-    };
-  
-    windowManager.i3 = {
-      enable = true;
-      extraPackages = with pkgs; [
-        dmenu
-	i3status
-	i3blocks
-	];
-      };
-    };
-  services.displayManager.defaultSession = "none+i3";
-  programs.i3lock.enable = true;
-
+    wrapperFeatures.gtk = true;
+  };
 
   # library for applying unpackaged programs
   programs.nix-ld.enable = true;
@@ -154,6 +139,11 @@
     direnv
     nix-direnv
     wakatime-cli
+    mako
+    grim
+    slurp
+    wl-clipboard
+    mako
   ];
 
   # Enable Steam (gaming)
